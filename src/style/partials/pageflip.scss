@@ -1,0 +1,120 @@
+body, html {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+.hidden {
+	display: none;
+}
+
+#magazine {
+	width: 100%;
+	height: 100%;
+}
+
+#magazine .container {
+
+	transform: translateZ(0);
+	position: relative;
+	margin: 0 auto;
+
+	width: 100%;
+	height: 100%;
+
+	.magazine-page {
+
+		height: 100%;
+		width: 100%;
+
+
+		position: absolute;
+		left: 0;
+		top: 0;
+		overflow: hidden;
+		backface-visibility: hidden;
+
+		transform-origin: 0% 50%;
+		will-change: transform;
+
+		&.turned {
+			transform: scaleX(0);
+			// display:none;
+		}
+
+		&.visible-gradient {
+			box-shadow: 4px 0 4px rgba(0,0,0,.4);
+			.gradient-element {
+				opacity: 0;
+				display: block;
+				// background: linear-gradient(to right,
+				// 	rgba(0,0,0,.2) 0,
+				// 	rgba(0,0,0,.1) 10%,
+				// 	rgba(255,255,255,.1) 15%,
+				// 	rgba(255,255,255,.35) 20%,
+				// 	rgba(255,255,255,.1) 25%,
+				// 	rgba(0,0,0,.1) 30%,
+				// 	rgba(0,0,0,.15) 35%,
+				// 	rgba(0,0,0,.2) 60%,
+				// 	rgba(0,0,0,.15) 70%,
+				// 	rgba(0,0,0,.1) 80%,
+				// 	rgba(255,255,255,.3)),
+				// 	linear-gradient(-60deg,
+				// 	rgba(0,0,0,.5) 0,
+				// 	rgba(0,0,0,.1) 40%,
+				// 	rgba(255,255,255,.1) 60%,
+				// 	rgba(255,255,255,.5) 100%);
+			}
+		}
+
+		.gradient-element{
+			// display: none;
+			pointer-events: none;
+			position: absolute;
+			opacity: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			top: 0;
+			z-index: 100500;
+		}
+
+	}
+
+}
+
+
+@media only screen and (min-aspect-ratio: 750/667) {
+
+		#magazine .container {
+
+		width: 100%;
+		height: 100%;
+
+		.magazine-page {
+			width: 50%;
+
+			&:nth-child(2n+1) {
+				left: 50%;
+				transform-origin: 0 50%;
+				&.turned {
+					transform: scaleX(0);
+				}
+			}
+
+			&:nth-child(2n) {
+				left:0;
+				transform: scaleX(0);
+				transform-origin: 100% 50%;
+				z-index: 10 !important;
+				&.turned {
+					transform: scaleX(1);
+				}
+			}
+
+		}
+	}
+
+}

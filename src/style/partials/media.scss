@@ -1,0 +1,94 @@
+/*
+
+one-page mode: from aspect ratio 375/667  to  750/667
+
+double-age mode: from aspect-ratio  750/667 to ...
+
+*/
+
+@media only screen and (min-aspect-ratio: 375/667) and (max-aspect-ratio: 750/667),
+only screen and (min-aspect-ratio: 750/667)  {
+
+	
+
+}
+
+
+
+@media only screen and (min-aspect-ratio: 425/667) and (max-aspect-ratio: 750/667),
+only screen and (min-aspect-ratio: 850/667) {
+
+	.center-content {
+		font-size: 1.6rem;
+	}
+
+}
+
+
+
+@media only screen and (min-aspect-ratio: 475/667) and (max-aspect-ratio: 750/667),
+only screen and (min-aspect-ratio: 950/667)  {
+
+	.col {
+		font-size: 1.2rem;
+	}
+
+	.double-col {
+		max-width: 26.7em;
+		font-size: 1.12rem;
+	}
+}
+
+
+
+@media only screen and (min-aspect-ratio: 525/667) and (max-aspect-ratio: 750/667),
+only screen and (min-aspect-ratio: 1050/667) {
+
+	.page {
+		&--image-text {
+
+			.inner-text {
+				font-size: 1.35rem;
+			}
+		}
+	}
+
+	.double-col {
+		max-width: 27.2em;
+		font-size: 1.16rem;
+	}
+
+}
+
+
+
+@media only screen and (min-aspect-ratio: 575/667) and (max-aspect-ratio: 750/667),
+only screen and (min-aspect-ratio: 1150/667) {
+
+	.double-col {
+		max-width: 29.2em;
+		font-size: 1.23rem;
+	}
+
+}
+
+
+
+@media only screen and (min-aspect-ratio: 625/667) and (max-aspect-ratio: 750/667),
+only screen and (min-aspect-ratio: 1250/667) {
+
+	.double-col {
+		max-width: 29.2em;
+		font-size: 1.23rem;
+	}
+
+}
+
+
+
+@media only screen and (min-aspect-ratio: 675/667) and (max-aspect-ratio: 750/667),
+only screen and (min-aspect-ratio: 1350/667) {
+
+	
+
+}

@@ -1,0 +1,166 @@
+/*
+
+one-page mode: from aspect ratio 375/667  to  750/667
+
+double-age mode: from aspect-ratio  750/667 to ...
+
+*/
+
+@media only screen and (min-aspect-ratio: 375/667) and (max-aspect-ratio: 750/667),
+only screen and (min-aspect-ratio: 750/667) {
+
+
+
+}
+
+
+
+@media only screen and (min-aspect-ratio: 425/667) and (max-aspect-ratio: 750/667),
+only screen and (min-aspect-ratio: 850/667) {
+
+
+	.page-2 {
+
+		.img-container {
+
+			img {
+				width: 115%;
+			}
+		}
+
+	}
+
+	.page-4 {
+		.img-container {
+			img {
+				margin-top: -3rem;
+			}
+		}
+	}
+
+
+}
+
+
+
+@media only screen and (min-aspect-ratio: 475/667) and (max-aspect-ratio: 750/667),
+only screen and (min-aspect-ratio: 950/667)  {
+
+	.page-1 {
+		.hgroup-1 {
+			font-size: 1.0rem;
+		}
+	}
+
+	.page-2 {
+		.img-container {
+			img {
+				width: 105%;
+			}
+		}
+	}
+
+	.page-4 {
+		.img-container {
+			img {
+				margin-top: -4rem;
+			}
+		}
+	}
+}
+
+@media only screen and (min-aspect-ratio: 525/667) and (max-aspect-ratio: 750/667),
+only screen and (min-aspect-ratio: 1050/667) {
+
+	.page-1 {
+		.hgroup-1 {
+			font-size: 1.1rem;
+		}
+	}
+
+	.page-2 {
+		.img-container {
+			img {
+				width: 100%;
+				margin-top: -1.5rem;
+			}
+		}
+
+	}
+
+	.page-4 {
+		.img-container {
+			img {
+				margin-top: -5rem;
+			}
+		}
+	}
+
+}
+
+
+
+@media only screen and (min-aspect-ratio: 575/667) and (max-aspect-ratio: 750/667),
+only screen and (min-aspect-ratio: 1150/667) {
+
+
+	.page-1 {
+		.hgroup-1 {
+			font-size: 1.2rem;
+		}
+	}
+
+	.page-2 {
+		.img-container {
+			width: 40rem;
+			margin: auto;
+			img {
+				margin: 0 auto;
+			}
+		}
+	}
+
+	.page-4 {
+		.img-container {
+			img {
+				margin-top: -6.25rem;
+			}
+		}
+	}
+
+	.page-6 {
+		.img-container {
+			img {
+				width: 100%;
+				margin-top: -4.4rem;
+			}
+		}
+	}
+
+
+}
+
+
+
+@media only screen and (min-aspect-ratio: 625/667) and (max-aspect-ratio: 750/667),
+only screen and (min-aspect-ratio: 1250/667) {
+
+	.page-4 {
+		.img-container {
+			img {
+				width: 100%;
+				margin-top: -6.75rem;
+			}
+		}
+	}
+
+}
+
+
+
+@media only screen and (min-aspect-ratio: 675/667) and (max-aspect-ratio: 750/667),
+only screen and (min-aspect-ratio: 1350/667) {
+
+
+
+}

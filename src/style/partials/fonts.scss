@@ -1,0 +1,52 @@
+@font-face {
+	font-family: 'Boyarsky';
+	src: url('../fonts/Boyarsky-BoldItalic_00.eot');
+	src: local('$(%&($*&%'),
+		url('../fonts/Boyarsky-BoldItalic_00.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/Boyarsky-BoldItalic_00.woff') format('woff'),
+		url('../fonts/Boyarsky-BoldItalic_00.ttf') format('truetype');
+	font-weight: bold;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Minion Pro';
+	src: url('../fonts/MinionPro-It.eot');
+	src: local('$%777&3#&#$'),
+		url('../fonts/MinionPro-It.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/MinionPro-It.woff') format('woff'),
+		url('../fonts/MinionPro-It.ttf') format('truetype');
+	font-weight: normal;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Minion Pro';
+	src: url('MinionPro-Regular.eot');
+	src: local('$%777&3#&#$'),
+		url('../fonts/MinionPro-Regular.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/MinionPro-Regular.woff') format('woff'),
+		url('../fonts/MinionPro-Regular.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'PT Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('PT Sans'), local('PTSans-Regular'), url(https://fonts.gstatic.com/s/ptsans/v8/7YGmE4Ls5b94ct65u07hVQLUuEpTyoUstqEm5AMlJo4.woff) format('woff');
+}
+@font-face {
+  font-family: 'PT Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: local('PT Sans Bold'), local('PTSans-Bold'), url(https://fonts.gstatic.com/s/ptsans/v8/0XxGQsSc1g4rdRdjJKZrNL3hpw3pgy2gAi-Ip7WPMi0.woff) format('woff');
+}
+@font-face {
+  font-family: 'PT Sans';
+  font-style: italic;
+  font-weight: 400;
+  src: local('PT Sans Italic'), local('PTSans-Italic'), url(https://fonts.gstatic.com/s/ptsans/v8/PIPMHY90P7jtyjpXuZ2cLLO3LdcAZYWl9Si6vvxL-qU.woff) format('woff');
+}
