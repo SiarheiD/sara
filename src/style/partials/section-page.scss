@@ -3,9 +3,6 @@
 	box-sizing: border-box;
 }
 
-.img-container {
-	box-shadow: 0 1px 5px rgba(0,0,0,.4);
-}
 
 .page {
 // first-type of page - just white background
@@ -36,7 +33,6 @@
 		.img-container {
 			flex-grow: 0;
 			position: relative;
-			font-size: 0;
 			img {
 				width: 100%;
 				height: auto;
@@ -143,7 +139,7 @@
 	font-size: 1rem;
 
 	h2 {
-		font-family: 'Boyarsky';
+		font-family: 'Boyarsky', 'PT Sans', Arial, sans-serif;
 		margin: 0;
 		margin-top: .2em;
 		font-size: 2.35em;
@@ -152,7 +148,7 @@
 	}
 
 	h3 {
-		font-family: 'Minion Pro';
+		font-family: $minion;
 		margin: 0;
 		font-size: 2.15em;
 		font-weight: 400;
@@ -160,7 +156,7 @@
 	}
 
 	h4 {
-		font-family: sans;
+		font-family: $minion;
 		margin: 0;
 		font-size: 1.8em;
 		font-weight: 400;
@@ -339,9 +335,4 @@
 	right: 0;
 	bottom: 0;
 	text-align: right;
-}
-.photo {
-	position: absolute;
-	top: 0;
-	left: 0;
 }

@@ -22,6 +22,7 @@
   },
   "devDependencies": {
     "gulp-img64": "0.0.6",
+    "gulp-inline-source": "^3.0.0",
     "gulp-svgmin": "^1.2.2",
     "gulp-svgstore": "^6.0.0",
     "path": "^0.12.7"

@@ -16,6 +16,7 @@ var gulp = require('gulp'),
     svgmin = require('gulp-svgmin'),
     gulpPath = require('path'),
         img64 = require('gulp-img64'),
+        inlinesource = require('gulp-inline-source'),
     reload = browserSync.reload;
 
 var path = {
@@ -68,6 +69,13 @@ gulp.task('webserver', function () {
     browserSync(config);
 });
 
+gulp.task('htmlonly', function(){
+    gulp.src('build/*.html')
+        .pipe(inlinesource())
+        .pipe(img64())
+        .pipe(gulp.dest(path.build.b64html));
+});
+
 gulp.task('b64', function(){
     gulp.src(path.src.b64html)
         .pipe(img64())
@@ -88,7 +96,7 @@ gulp.task('html:build', function () {
 gulp.task('js:build', function () {
     gulp.src(path.src.js)
         .pipe(rigger())
-     //   .pipe(uglify())
+        .pipe(uglify())
         .pipe(gulp.dest(path.build.js))
         .pipe(reload({stream: true}));
 });
@@ -97,7 +105,7 @@ gulp.task('style:build', function () {
     gulp.src(path.src.style)
         .pipe(sass({
             includePaths: ['src/style/'],
-            // outputStyle: 'compressed',
+            outputStyle: 'compressed',
             sourceMap: true,
             errLogToConsole: true
         }))
@@ -105,7 +113,7 @@ gulp.task('style:build', function () {
           browsers: ['last 15 versions'],
           cascade: false
         }))
-        // .pipe(cssmin())
+        .pipe(cssmin())
         .pipe(gulp.dest(path.build.css))
         .pipe(reload({stream: true}));
 });

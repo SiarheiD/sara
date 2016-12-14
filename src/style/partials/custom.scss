@@ -1,5 +1,5 @@
 .page-1 {
-	background-image: url(../img/p_1.jpg);
+	background-image: url($p_1);
 	background-position: 50% 50%;
 	.hgroup-1 {
 		position: relative;
@@ -83,7 +83,7 @@
 }
 
 .page-7 {
-	background-image: url(../img/p_7.jpg);
+	background-image: url($p_7);
 	background-position: 62% 50%;
 	.text {
 		position: absolute;

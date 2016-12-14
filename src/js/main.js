@@ -32,8 +32,15 @@ var trimm = function(value, min, max){
 
 var getTransFormScaleXValue = function(element) {
 	var transform = element.css('transform');
-	return Number( transform.slice(7, transform.indexOf(',')) );
+	if (transform === 'none') return 1;
+	return Number( transform.slice(7, -1).split(',')[0] );
 };
+
+var getTransformTranslateX = function(element) {
+	var transform = element.css('transform');
+	if (transform === 'none') return 0;
+	return Number(element.css('transform').slice(7,-1).split(',')[4]);
+}
 
 var transitionEnd = 'transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd';
 var trTimeFunction = {
@@ -63,6 +70,7 @@ var Model = {
 
 	set currentIndex(value){
 		this.index = trimm(value, 0, this.pagesCount - 1);
+		window.location.hash = this.index + 1;
 	},
 
 	animate: function(delta, viewMode){
@@ -174,6 +182,13 @@ var Model = {
 					facePlay(face, backface);
 				};
 
+				if (Model.currentIndex === 1 || Model.currentIndex === 2) {
+					containerPlay(0);
+				} else
+				if (Model.currentIndex === Model.pagesCount - 1 && Model.pagesCount % 2 === 0) {
+					containerPlay(1);
+				};
+
 				function backfacePlay(backface){
 					var delta = 1 - getTransFormScaleXValue(backface);
 					backface.css({
@@ -216,14 +231,40 @@ var Model = {
 					});
 				};
 
+				function containerPlay(value){
+					var contDelta;
+					var transformValue;
+
+					if (value === 0) {
+						contDelta = 1 - Math.abs(getTransformTranslateX(View.container)/$(window).width())/.25
+						transformValue = '-25%';
+					} else if (value === 1) {
+						contDelta = Math.abs(getTransformTranslateX(View.container)/$(window).width())/.25
+						transformValue = '0';
+					};
+
+					View.changedContainer = null;
+
+					View.container.css({
+						'transition': 'transform ' + trDuration * contDelta + 's',
+						'transform' : 'translateX(' + transformValue + ')',
+					});
+
+					View.container.on(transitionEnd, function(){
+						$(this).css({
+							'transition': '',
+						});
+
+						View.container.off(transitionEnd);
+					});
+
+				};
 			},
 
 			'next': function(delta, viewMode){
 
-				if ( !(Model.currentIndex < Model.pagesCount - 1) ) return false;
-
-
 				var face, backface;
+				if ( Model.currentIndex === Model.pagesCount - 1 && Model.pagesCount % 2 === 0 ) return false;
 
 				if (Model.currentIndex % 2 === 0){
 					face = View.pages.eq(Model.currentIndex);
@@ -234,45 +275,43 @@ var Model = {
 				};
 
 				// centered first page
-				// if (Model.currentIndex === 0) {
-				// 	View.container.css({
-				// 		'transition': 'transform ' + 1 + 's',
-				// 		'transform' : 'translateX(0)',
-				// 	});
-				// 	View.container.on(transitionEnd, function(){
-				// 		$(this).css({
-				// 			'transition': '',
-				// 			'transform' : '',
-				// 		});
-
-				// 		View.container.off(transitionEnd);
-				// 	})
-				// };
-
+				if (Model.currentIndex === 0) {
+					containerPlay(0);
+				} else 
+				if ( Model.currentIndex > Model.pagesCount - 4 && Model.pagesCount % 2 === 0 ) {
+					containerPlay(1);
+				};
 
 				View.changedPages = [];
 				Model.pageInPlay = true;
 
-				if (getTransFormScaleXValue(face) === 0) {
+				if ( Model.currentIndex >=  Model.pagesCount - 2 && Model.pagesCount % 2 !== 0) {
+					backfacePlay(face, 'last');
+				} else if (getTransFormScaleXValue(face) === 0) {
 					backfacePlay(backface);
 				} else {
 					facePlay(face, backface);
 				};
 
-				function backfacePlay(backface){
+
+				function backfacePlay(backface, last){
 					var delta = 1 - getTransFormScaleXValue(backface);
+
 					backface.css({
 						'transition': 'transform ' + (trDuration * delta) + 's ' + trTimeFunction.doubleBackface,
 						'transform' : 'scaleX(1)',
 					});
 
 					backface.on(transitionEnd, function(){
-						$(this).addClass('turned');
+						if (!last) {
+							$(this).addClass('turned');
+							Model.currentIndex += 2;
+						}
+
 						$(this).css({
 							'transition': '',
 							'transform' : '',
 						});
-						Model.currentIndex += 2;
 
 						Model.pageInPlay = false;
 						View.hideUnnecessaryPages(Model.currentIndex);
@@ -283,6 +322,7 @@ var Model = {
 
 				function facePlay(face, backface){
 					var delta = getTransFormScaleXValue(face);
+
 					face.css({
 							'transition': 'transform ' + (trDuration * delta) + 's ' + trTimeFunction.doubleFace,
 							'transform' : 'scaleX(0)',
@@ -300,6 +340,35 @@ var Model = {
 
 						face.off(transitionEnd);
 					});
+				};
+
+				function containerPlay(value){
+					var contDelta;
+					var transformValue;
+
+					if (value === 0) {
+						contDelta = Math.abs(getTransformTranslateX(View.container)/$(window).width())/.25
+						transformValue = '0';
+					} else if (value === 1) {
+						contDelta = 1 - Math.abs(getTransformTranslateX(View.container)/$(window).width())/.25
+						transformValue = '25%';
+					};
+
+					View.changedContainer = null;
+
+					View.container.css({
+						'transition': 'transform ' + trDuration * contDelta + 's',
+						'transform' : 'translateX(' + transformValue + ')',
+					});
+
+					View.container.on(transitionEnd, function(){
+						$(this).css({
+							'transition': '',
+						});
+
+						View.container.off(transitionEnd);
+					});
+
 				};
 
 
@@ -348,7 +417,7 @@ var Model = {
 
 				if (self.currentIndex === 1 || self.currentIndex === 2) {
 					View.changedContainer = trimm( -delta.x * 25 , -25, 0);
-				} else if (self.currentIndex === self.pagesCount - 1) {
+				} else if (self.pagesCount % 2 === 0 && self.currentIndex === self.pagesCount - 1 ) {
 					View.changedContainer = trimm( (1 - delta.x) * 25 , 0, 25)
 				}
 
@@ -372,7 +441,8 @@ var Model = {
 				var self = Model;
 				var face, backface;
 				var value;
-				if (self.currentIndex === self.pagesCount - 1) return false;
+				if ( Model.currentIndex === Model.pagesCount - 1 && Model.pagesCount % 2 === 0 ) return false;
+
 				if (self.currentIndex % 2 === 0){
 					face = self.currentIndex;
 					backface = self.currentIndex + 1;
@@ -412,15 +482,26 @@ var Model = {
 
 	},
 
+	checkHash: function(){
+		var self = this;
+
+		var hash = Number(window.location.hash.slice(1));
+		if (isNaN(hash)) return self;
+
+		if ( hash - 1 === self.currentIndex ) return self;
+
+		self.currentIndex = hash - 1;
+		View.goTo(self.currentIndex);
+
+	},
 
 	init: function(magazineSelector, pageSelector) {
 
 		var self = this;
+
 		View.init(magazineSelector, pageSelector);
 
-		// self.count = View.pages.length;
-		// self.current = 0;
-		// self.currentIndex = 0;
+		self.count = View.pages.length;
 	},
 
 };
@@ -512,7 +593,7 @@ var View = {
 		var self = View;
 		// условие для включения/выключения цикла
 		self.drawChangedPages();
-		// self.drawContainer();
+		self.drawContainer();
 		requestAnimationFrame(self.drawLoop);
 
 	},
@@ -544,17 +625,9 @@ var View = {
 		var self = this;
 		var pages = self.pages;
 
-		if (index > pages.length - 1) {
-			index = pages.length - 1;
-		} else if (index < 0){
-			index = 0;
-		};
 
-		if (index !== undefined) {
-			Model.currentIndex = index;
-		} else {
-			index = Model.currentIndex;
-		};
+		Model.currentIndex = index;
+		index = Model.currentIndex;
 
 // пробегаем по страницам и в зависимости от viewMode 
 // добавляем классы turned (для перевернутых страниц)
@@ -569,18 +642,18 @@ var View = {
 			pages.eq(index).nextAll().removeClass('turned');
 		};
 
-		// if (self.viewMode === 'double') {
-		// 	if (index === 0) {
-		// 		self.container.css('transform', 'translateX(-25%)')
-		// 	} else
-		// 	if (index === self.pages.length - 1) {
-		// 		self.container.css('transform', 'translateX(25%)')
-		// 	} else {
-		// 		self.container.css('transform', '')
-		// 	};
-		// } else {
-		// 	self.container.css('transform', '')
-		// };
+		if (self.viewMode === 'double') {
+			if (index === 0) {
+				self.container.css('transform', 'translateX(-25%)')
+			} else
+			if (index === self.pages.length - 1 && index % 2 !== 0) {
+				self.container.css('transform', 'translateX(25%)')
+			} else {
+				self.container.css('transform', '')
+			};
+		} else {
+			self.container.css('transform', '')
+		};
 
 		self.hideUnnecessaryPages();
 		return self;
@@ -604,23 +677,21 @@ var View = {
 		return self;
 	},
 
-
 	init: function(magazineSelector, pageSelector){
 
 		var self = this;
 		self.magazine = $(magazineSelector);
 		self.pages = self.magazine.find(pageSelector);
+		Model.pagesCount = self.pages.length;
 		self.container = self.magazine.children('.container');
+		Model.checkHash();
 		self.zIndexRules(pageSelector)
 			.checkViewMode()
-			.goTo(0)
-			.hideUnnecessaryPages(0)
+			.goTo(Model.currentIndex)
+			.hideUnnecessaryPages(Model.currentIndex)
 			.drawLoop();
 		Model.pagesCount = self.pages.length;
 
-
-		Model.currentIndex = Number(window.location.hash.slice(1));
-		self.goTo(Model.currentIndex);
 	},
 
 
@@ -662,6 +733,10 @@ var Controller = {
 		View.hideUnnecessaryPages(Model.currentIndex);
 
 	},
+
+	hashChange: function() {
+		Model.checkHash();
+	}
 };
 
 /* ============================ */
@@ -742,13 +817,9 @@ var Controller = {
 
 			});
 
-				$(window).on('hashchange', function(){
-					Model.currentIndex = Number(window.location.hash.slice(1));
-					View.goTo(Model.currentIndex);
-				})
 
 			$(window).on('resize', Controller.resize);
-
+			$(window).on('hashchange', Controller.hashChange);
 			//custom
 			$(window).on('turned', Controller.onTurn);
 		},

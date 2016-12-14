@@ -7,15 +7,13 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>Ritmika</title>
+	<title>Sara</title>
 
-	<link rel="stylesheet" href="">
-	<link href="https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700" rel="stylesheet">
-	<link rel="stylesheet" href="css/normalize.min.css">
-	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="css/normalize.min.css" inline>
+	<link rel="stylesheet" href="css/main.css" inline>
 </head>
 <body>
-<!-- 	<div class="full-scr" style="display: block; position: fixed; height: 30px; width: 30px; border: 2px solid; top: 5px; right: 5px; z-index: 100500;"></div> -->
+
 	<div id="magazine">
 
 		<div class="container">
@@ -32,8 +30,10 @@
 
 					<div class="autographo content">
 						<p>
-							Quiero un autógrafo de<br>Sara Baóon
+							Quiero un autógrafo de<br>
+							<a href="https://youtu.be/9R13DmfqkoY" target="_blank">Sara Bayón</a>
 						</p>
+
 					</div>
 				</section>
 
@@ -204,34 +204,9 @@
 		</div><!--close container -->
 	</div> <!-- close magazine -->
 
-<script src="js/jquery.min.js"></script>
+<script src="js/jquery.min.js" inline></script>
 
-<script src="js/main.js"></script>
-<script>
-	function toggleFullScreen() {
-	  if (!document.fullscreenElement &&    // alternative standard method
-	      !document.mozFullScreenElement && !document.webkitFullscreenElement) {  // current working methods
-	    if (document.documentElement.requestFullscreen) {
-	      document.documentElement.requestFullscreen();
-	    } else if (document.documentElement.mozRequestFullScreen) {
-	      document.documentElement.mozRequestFullScreen();
-	    } else if (document.documentElement.webkitRequestFullscreen) {
-	      document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
-	    }
-	  } else {
-	    if (document.cancelFullScreen) {
-	      document.cancelFullScreen();
-	    } else if (document.mozCancelFullScreen) {
-	      document.mozCancelFullScreen();
-	    } else if (document.webkitCancelFullScreen) {
-	      document.webkitCancelFullScreen();
-	    }
-	  }
-	}
-	$('.full-scr').on('click', function(){
-		$(this).css('opacity', '.3');
-		toggleFullScreen();
-	});
-</script>
+<script src="js/main.js" inline></script>
+
 </body>
 </html>

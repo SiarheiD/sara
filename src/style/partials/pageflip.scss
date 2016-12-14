@@ -24,6 +24,8 @@ body, html {
 	width: 100%;
 	height: 100%;
 
+	overflow: hidden;
+
 	.magazine-page {
 
 		height: 100%;
@@ -39,9 +41,11 @@ body, html {
 		transform-origin: 0% 50%;
 		will-change: transform;
 
+		box-shadow: 2px 0 2px rgba(0,0,0,.5);
+
 		&.turned {
 			transform: scaleX(0);
-			// display:none;
+
 		}
 
 		&.visible-gradient {
@@ -99,18 +103,79 @@ body, html {
 			&:nth-child(2n+1) {
 				left: 50%;
 				transform-origin: 0 50%;
+				box-shadow: 2px 0 2px rgba(0,0,0,.5);
 				&.turned {
 					transform: scaleX(0);
+				}
+				&:before {opacity: .2;
+					display: block;
+					content: '';
+					width: 4%;
+					position: absolute;
+					left: 0;
+					top: 0;
+					height: 100%;
+					background: linear-gradient(to left,
+						rgba(100,100,100,.0) 0%,
+						rgba(90,90,90,.025) 15%,
+						rgba(80,80,80,.05) 30%,
+						rgba(70,70,70,.075) 40%,
+						rgba(60,60,60,.10) 50%,
+						rgba(50,50,50,.125) 60%,
+						rgba(50,50,50,.15) 65%,
+						rgba(50,50,50,.175) 70%,
+						rgba(50,50,50,.20) 75%,
+						rgba(50,50,50,.225) 80%,
+						rgba(50,50,50,.275) 85%,
+						rgba(50,50,50,.30) 90%,
+						rgba(50,50,50,.35) 92%,
+						rgba(50,50,50,.40) 94%,
+						rgba(50,50,50,.45) 96%,
+						rgba(50,50,50,.50) 98%,
+						rgba(50,50,50,.55) 100%
+						);
+					z-index: 100;
 				}
 			}
 
 			&:nth-child(2n) {
 				left:0;
 				transform: scaleX(0);
+				box-shadow: -2px 0 2px rgba(0,0,0,.5);
 				transform-origin: 100% 50%;
 				z-index: 10 !important;
 				&.turned {
 					transform: scaleX(1);
+				}
+				&:before {opacity: .2;
+					display: block;
+					content: '';
+					width: 4%;
+					position: absolute;
+					right: 0;
+					top: 0;
+					height: 100%;
+					z-index: 100;
+					background: linear-gradient(to right,
+						rgba(100,100,100,.0) 0%,
+						rgba(90,90,90,.025) 15%,
+						rgba(80,80,80,.05) 30%,
+						rgba(70,70,70,.075) 40%,
+						rgba(60,60,60,.10) 50%,
+						rgba(50,50,50,.125) 60%,
+						rgba(50,50,50,.15) 65%,
+						rgba(50,50,50,.175) 70%,
+						rgba(50,50,50,.20) 75%,
+						rgba(50,50,50,.225) 80%,
+						rgba(50,50,50,.275) 85%,
+						rgba(50,50,50,.30) 90%,
+						rgba(50,50,50,.35) 92%,
+						rgba(50,50,50,.40) 94%,
+						rgba(50,50,50,.45) 96%,
+						rgba(50,50,50,.50) 98%,
+						rgba(50,50,50,.55) 100%
+						);
+					z-index: 100;
 				}
 			}
 
