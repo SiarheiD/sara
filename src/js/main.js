@@ -1,13 +1,3 @@
-/*
-
-actModel = {
-
-	draw: function(value) {
-	}
-}
-
-*/
-
 'use strict';
 
 Function.prototype.throttle = function (milliseconds) {
@@ -760,10 +750,13 @@ var Controller = {
 		},
 
 		event: function(){
-
+			var touched = false;
 			$(window).on('mousedown touchstart', function(eDown) {
 
+				if (touched) return false;
 				if (Model.pageInPlay) return false;
+
+					touched = true;
 
 				if (eDown.type === 'touchstart') {
 					eDown.originalEvent.changedTouches[0].preventDefault = eDown.preventDefault;
@@ -808,6 +801,7 @@ var Controller = {
 						Controller.stopMoving(delta);
 					};
 
+						touched = false;
 
 
 					$(window).off('mouseup');
